@@ -11,7 +11,7 @@ const {
   createShedule,
   changeShedule,
   deleteShedule
-} = require('../controllers/schedule-controller')
+} = require('../controllers/schedule-controller');
 
 router.post('/createUser', registration);
 router.post('/login', authorization);

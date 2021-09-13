@@ -12,7 +12,7 @@ module.exports.registration = async (req, res, next) => {
   } else {
     user.password = bcrypt.hashSync(user.password, 5);
 
-    const payload = {id: user._id, login: user.login } ;
+    const payload = {id: user._id, login: user.login };
     const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, {expiresIn: '30m'});
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_TOKEN, {expiresIn: '30d'});
 
@@ -36,7 +36,7 @@ module.exports.authorization = async (req, res) => {
       const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, {expiresIn: '30m'});
       res.send({accessToken});
     } else {
-      res.status(400).send({message: 'Error! This password does not exist'})
+      res.status(400).send({message: 'Error! This password does not exist'});
     }
   }
 }
