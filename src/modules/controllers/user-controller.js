@@ -22,13 +22,13 @@ module.exports.registration = async (req, res, next) => {
 }
 
 module.exports.authorization = async (req, res) => {
-  const user = new User(req.body);
-  const checkLogin = await User.findOne({login: user.login});
+  const { login, password } = req.body;
+  const user = await User.findOne({login: login});
 
-  if (!checkLogin) {
+  if (!user) {
     res.status(401).send({message: 'Error! This username does not exist'});
   } else {
-    const checkPass = await bcrypt.compare(user.password, checkLogin.password);
+    const checkPass = await bcrypt.compare(password, user.password);
 
     if (checkPass) {
       const payload = {id: user._id, login: user.login } ;
