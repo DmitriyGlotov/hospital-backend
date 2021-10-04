@@ -22,7 +22,7 @@ module.exports.registration = async (req, res, next) => {
 }
 
 module.exports.authorization = async (req, res) => {
-  const {login, password} = req.body;
+  const { login, password } = req.body;
   const user = await User.findOne({login: login});
 
   if (!user) {

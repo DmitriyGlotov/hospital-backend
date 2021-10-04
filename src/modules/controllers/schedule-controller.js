@@ -2,7 +2,7 @@ const Shedule = require('../../db/models/shedule/shedule');
 const jwt = require("jsonwebtoken");
 
 module.exports.allShedule = (req, res) => {
-  const {authorization} = req.headers;
+  const { authorization } = req.headers;
   const decoded = jwt.verify(authorization, process.env.JWT_ACCESS_TOKEN);
   Shedule.find({UserId: decoded.id}).then(result => {
     res.send({ data: result });
@@ -35,7 +35,7 @@ module.exports.deleteShedule = (req, res) => {
 const { authorization } = req.headers;
 const decoded = jwt.verify(authorization, process.env.JWT_ACCESS_TOKEN);
 Shedule.deleteOne({_id: req.query._id}).then(result => {
-  Shedule.find({UserId: decoded._id}).then(result => {
+  Shedule.find({UserId: decoded.id}).then(result => {
       res.send({ data: result });
     });
   });
